@@ -5,16 +5,13 @@
  */
 package principal;
 
-import java.util.ArrayList;
 import javax.swing.JTextField;
 
 /**
  *
  * @author Vanderlei
  */
-public class Botao {
-    private ArrayList numero;
-    
+public class Botao {    
     
     public void Preenche(JTextField txt, String numeroBotao){
         
