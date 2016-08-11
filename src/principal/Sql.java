@@ -20,7 +20,9 @@ public class Sql {
     private ResultSet rs;
     private String connectionString = "jdbc:sqlite:CamDB.db";    
     private String query;
-    private List dados = new ArrayList();
+    private List cliente1 = new ArrayList();
+    public  List todosOsNomes = new ArrayList();
+    private List todosOsIndices = new ArrayList();
     
     
     public boolean Connect(){
@@ -45,13 +47,14 @@ public class Sql {
             ResultSet rs = stmt.executeQuery("SELECT * FROM Geral;");
             ResultSetMetaData rsmd = rs.getMetaData();
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                dados.add(rs.getString(i+1));                
+                cliente1.add(rs.getString(i+1));                
             }            
-//            while (rs.next()) {                
-//                for (int i = 0; i < rsmd.getColumnCount(); i++) {
-//                dados.add(rs.getString(i+1));                
-//                }                
-//            }            
+            while (rs.next()) {                
+                
+                todosOsNomes.add(rs.getString(3));
+                todosOsIndices.add(rs.getInt(1));
+                
+            }            
             
             rs.close();
             stmt.close();
@@ -60,22 +63,22 @@ public class Sql {
         } catch (Exception e) {      
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
         }
-        return dados;
+        return cliente1;
     }
     
-    public void AtualizaCampos(ResultSetMetaData colunas) {
-    
-        try{
-            for (int i = 0; i < colunas.getColumnCount(); i++) {
-                dados.add(rs.getString(i+1));
-                System.out.println(dados.get(i));
-            }
-        } catch(Exception e){
-            
-        }
-        
-        
-    }
+//    public void AtualizaCampos(ResultSetMetaData colunas) {
+//    
+//        try{
+//            for (int i = 0; i < colunas.getColumnCount(); i++) {
+//                dados.add(rs.getString(i+1));
+//                System.out.println(dados.get(i));
+//            }
+//        } catch(Exception e){
+//            
+//        }
+//        
+//        
+//    }
 }
 
 
