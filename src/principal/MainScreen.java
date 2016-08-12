@@ -503,12 +503,22 @@ public class MainScreen extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar cliente"));
 
         btPrimeiro.setText("Primeiro");
+        btPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPrimeiroActionPerformed(evt);
+            }
+        });
 
         btAnterior.setText("Anterior");
 
         btProximo.setText("Próximo");
 
         btUltimo.setText("Último");
+        btUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btUltimoActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -909,11 +919,26 @@ public class MainScreen extends javax.swing.JFrame {
         PopulaCampos(sql.AbreTabela());
         
         List tamanho = sql.todosOsNomes;
-        for (Object teste : tamanho) {
-            cbSelecionar.addItem((String)teste);
+        for (Object objeto : tamanho) {
+            cbSelecionar.addItem((String)objeto);
         }
         //cbSelecionar.addItem(item);
     }//GEN-LAST:event_formWindowOpened
+
+    private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
+        // TODO add your handling code here:
+        Sql sql = new Sql();        
+        PopulaCampos(sql.SelectMinMax(evt.getActionCommand()));
+        
+        
+    }//GEN-LAST:event_btPrimeiroActionPerformed
+
+    private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
+        // TODO add your handling code here:
+        Sql sql = new Sql();        
+        PopulaCampos(sql.SelectMinMax(evt.getActionCommand()));
+        
+    }//GEN-LAST:event_btUltimoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1050,6 +1075,8 @@ public class MainScreen extends javax.swing.JFrame {
         txtValor.setText(valor.format(numero));
         
         txtData.setText((String)dados.get(10));
+        
+        cbSelecionar.setSelectedItem(dados.get(2));
         
         
     }

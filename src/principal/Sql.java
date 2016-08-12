@@ -66,19 +66,41 @@ public class Sql {
         return cliente1;
     }
     
-//    public void AtualizaCampos(ResultSetMetaData colunas) {
-//    
-//        try{
-//            for (int i = 0; i < colunas.getColumnCount(); i++) {
-//                dados.add(rs.getString(i+1));
-//                System.out.println(dados.get(i));
-//            }
-//        } catch(Exception e){
-//            
-//        }
-//        
-//        
-//    }
+    public List SelectMinMax(String posicao){
+        try {
+            String query;
+            if (posicao.equals("Primeiro")) {
+               query = "SELECT * FROM Geral" +
+                       " WHERE id = " +
+                       " (SELECT MIN(id) FROM Geral);"; 
+            }
+            else{
+                query = "SELECT * FROM Geral" +
+                           " WHERE id = " +
+                           " (SELECT MAX(id) FROM Geral);";
+            }            
+            
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                cliente1.add(rs.getString(i+1));                
+            }            
+            rs.close();
+            stmt.close();
+            con.close();   
+            
+            
+            
+        } catch (Exception e) {      
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
+        }
+        return cliente1;
+    }
+    
+
 }
 
 

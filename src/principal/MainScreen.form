@@ -826,6 +826,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Primeiro"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btPrimeiroActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btAnterior">
                   <Properties>
@@ -841,6 +844,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="&#xda;ltimo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btUltimoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btLimpar">
                   <Properties>
