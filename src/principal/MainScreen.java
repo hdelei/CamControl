@@ -30,7 +30,9 @@ public class MainScreen extends javax.swing.JFrame {
     /**
      * Creates new form MainScreen
      */
-    Botao botao= new Botao();;
+    Botao botao = new Botao();
+    String indiceAtual;
+    List nomes, ids;
     
     public MainScreen() {
         initComponents();
@@ -115,6 +117,8 @@ public class MainScreen extends javax.swing.JFrame {
         btSalvar = new javax.swing.JButton();
         btIncluir = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        lblRegistro = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(800, 600));
@@ -502,6 +506,17 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Selecionar cliente"));
 
+        cbSelecionar.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbSelecionarItemStateChanged(evt);
+            }
+        });
+        cbSelecionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSelecionarActionPerformed(evt);
+            }
+        });
+
         btPrimeiro.setText("Primeiro");
         btPrimeiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -510,8 +525,18 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         btAnterior.setText("Anterior");
+        btAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAnteriorActionPerformed(evt);
+            }
+        });
 
         btProximo.setText("Próximo");
+        btProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btProximoActionPerformed(evt);
+            }
+        });
 
         btUltimo.setText("Último");
         btUltimo.addActionListener(new java.awt.event.ActionListener() {
@@ -541,7 +566,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btProximo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btUltimo, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addComponent(btLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -586,6 +611,10 @@ public class MainScreen extends javax.swing.JFrame {
                 btExcluirActionPerformed(evt);
             }
         });
+
+        lblRegistro.setText("100");
+
+        jLabel12.setText("Registro nº ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -641,8 +670,16 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(10, 10, 10))
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblRegistro)
+                                        .addGap(14, 14, 14))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -688,7 +725,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtArmazena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -701,8 +738,10 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblRegistro)
+                        .addComponent(jLabel12)))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes com câmeras", jPanel1);
@@ -736,13 +775,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         // TODO add your handling code here:
         limpaTexto();
-        //        Component[] components = jPanel1.getComponents();
-        //    for (Component component : components) {
-            //        if (component instanceof JTextField || component instanceof JTextArea) {
-                //            JTextComponent specificObject = (JTextComponent) component;
-                //            specificObject.setText("");
-                //        }
-            //    }
+        
 
     }//GEN-LAST:event_btLimparActionPerformed
 
@@ -916,29 +949,81 @@ public class MainScreen extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         Sql sql = new Sql();        
-        PopulaCampos(sql.AbreTabela());
+        //popula campos inicial com o primeiro cliente
+        PopulaCampos(sql.AbreTabela());        
         
-        List tamanho = sql.todosOsNomes;
-        for (Object objeto : tamanho) {
+        //Atualiza nomes e ids
+        nomes = sql.getNomes();
+        ids = sql.getIDs();
+        
+        //popula o combobox
+        nomes.stream().forEach((objeto) -> {
             cbSelecionar.addItem((String)objeto);
-        }
-        //cbSelecionar.addItem(item);
+        });
     }//GEN-LAST:event_formWindowOpened
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
         // TODO add your handling code here:
         Sql sql = new Sql();        
-        PopulaCampos(sql.SelectMinMax(evt.getActionCommand()));
-        
-        
+        PopulaCampos(sql.SelectPrimeiroUltimo(evt.getActionCommand()));        
     }//GEN-LAST:event_btPrimeiroActionPerformed
 
     private void btUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btUltimoActionPerformed
         // TODO add your handling code here:
         Sql sql = new Sql();        
-        PopulaCampos(sql.SelectMinMax(evt.getActionCommand()));
+        PopulaCampos(sql.SelectPrimeiroUltimo(evt.getActionCommand()));
         
     }//GEN-LAST:event_btUltimoActionPerformed
+
+    private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
+        
+        String botao = evt.getActionCommand(); 
+        Sql sql = new Sql();
+        
+        //chama o método proximo/anterior e cria lista
+        //para popular o formulário
+        List dados = sql.SelectProxAnt(botao, indiceAtual);
+        if (dados.size() > 0) {
+            PopulaCampos(dados);
+        }
+    }//GEN-LAST:event_btAnteriorActionPerformed
+
+    private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        
+        String botao = evt.getActionCommand(); 
+        
+        Sql sql = new Sql();
+        
+        //chama o método proximo/anterior e cria lista
+        //para popular o formulário
+        List dados = sql.SelectProxAnt(botao, indiceAtual);
+        if (dados.size() > 0) {
+            PopulaCampos(dados);
+        }
+    }//GEN-LAST:event_btProximoActionPerformed
+
+    private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
+        Sql sql = new Sql();        
+        int indice = cbSelecionar.getSelectedIndex();
+        //Obtém o registro através do indice do arrayList
+        String registro = ids.get(indice).toString();
+                
+        PopulaCampos(sql.SelectPorIndice(registro));        
+    }//GEN-LAST:event_cbSelecionarActionPerformed
+
+    private void cbSelecionarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSelecionarItemStateChanged
+        // TODO add your handling code here:
+        //Sql sql = new Sql();
+        
+        
+        //int indice = cbSelecionar.getSelectedIndex();
+        
+        //String registro = (String)ids.get(indice);
+        //System.out.println(registro);
+        
+        //List dados = sql.SelectPorIndice(indiceAtual);
+        //PopulaCampos(dados);
+    }//GEN-LAST:event_cbSelecionarItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -1021,6 +1106,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1033,6 +1119,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblRegistro;
     private javax.swing.JTextField txtArmazena;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
@@ -1051,8 +1138,9 @@ public class MainScreen extends javax.swing.JFrame {
             JTextComponent specificObject = (JTextComponent) component;
             specificObject.setText("");
             }
-        }//        
-    
+        }       
+        
+        //Insere data atual para facilitar a inclusão de um novo cliente
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();        
         txtData.setText(dateFormat.format(date));
@@ -1061,6 +1149,11 @@ public class MainScreen extends javax.swing.JFrame {
         
     }
     private void PopulaCampos(List dados){
+        //Transforma o valor em decimal
+        DecimalFormat valor = new DecimalFormat("0.00");
+        Float numero = Float.parseFloat((String)dados.get(9));
+        
+        //Popula todos os campos
         txtCodigo.setText((String)dados.get(1));
         txtNome.setText((String)dados.get(2));
         txtDdns.setText((String)dados.get(3));
@@ -1068,16 +1161,18 @@ public class MainScreen extends javax.swing.JFrame {
         cbTotal.setSelectedItem((String)dados.get(5));        
         cbAtivo.setSelectedItem((String)dados.get(6));        
         txtArmazena.setText((String)dados.get(7));
-        txtTempo.setText((String)dados.get(8));
-        
-        DecimalFormat valor = new DecimalFormat("0.00");//dados.get(8)
-        Float numero = Float.parseFloat((String)dados.get(9));
-        txtValor.setText(valor.format(numero));
-        
+        txtTempo.setText((String)dados.get(8));        
+        txtValor.setText(valor.format(numero));        
         txtData.setText((String)dados.get(10));
         
+        //Atualiza o cliente atual no combobox
         cbSelecionar.setSelectedItem(dados.get(2));
         
+        //atualiza a PK para ser usada em outras chamadas
+        indiceAtual = (String)dados.get(0);
+        
+        //Atualiza a label com o número real do registro
+        lblRegistro.setText(indiceAtual);       
         
     }
 }

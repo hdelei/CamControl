@@ -7,6 +7,7 @@
 package principal;
 
 import java.sql.*;
+import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -20,10 +21,17 @@ public class Sql {
     private ResultSet rs;
     private String connectionString = "jdbc:sqlite:CamDB.db";    
     private String query;
-    private List cliente1 = new ArrayList();
-    public  List todosOsNomes = new ArrayList();
-    private List todosOsIndices = new ArrayList();
+    private List cliente = new ArrayList();
+    private List nomes = new ArrayList();
+    private List ids = new ArrayList();
     
+    public List getNomes(){
+        return nomes;
+    }    
+    
+    public List getIDs(){
+        return ids;
+    }
     
     public boolean Connect(){
         try{
@@ -39,21 +47,52 @@ public class Sql {
         return true;
     }
     
+    public List SelectPorIndice(String id){
+        try {
+            query = "SELECT * FROM Geral" +
+                    " WHERE id = " + id + ";";
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            
+            ResultSetMetaData rsmd = rs.getMetaData();
+            
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                cliente.add(rs.getString(i+1));                
+            }            
+            
+//            while (rs.next()) {                
+//                todosOsNomes.add(rs.getString(3));
+//                todosOsIndices.add(rs.getInt(1));                
+//            }            
+            
+            rs.close();
+            stmt.close();
+            con.close();   
+            
+        } catch (Exception e) {      
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
+        }
+        
+        return cliente;
+    }
+    
     public List AbreTabela(){       
         try {
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM Geral;");
+            rs = stmt.executeQuery("SELECT * FROM Geral;");
             ResultSetMetaData rsmd = rs.getMetaData();
+            
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                cliente1.add(rs.getString(i+1));                
+                cliente.add(rs.getString(i+1));                
             }            
+            
             while (rs.next()) {                
-                
-                todosOsNomes.add(rs.getString(3));
-                todosOsIndices.add(rs.getInt(1));
-                
+                nomes.add(rs.getString(3));
+                ids.add(rs.getInt(1));                
             }            
             
             rs.close();
@@ -63,12 +102,11 @@ public class Sql {
         } catch (Exception e) {      
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
         }
-        return cliente1;
+        return cliente;
     }
     
-    public List SelectMinMax(String posicao){
-        try {
-            String query;
+    public List SelectPrimeiroUltimo(String posicao){
+        try {            
             if (posicao.equals("Primeiro")) {
                query = "SELECT * FROM Geral" +
                        " WHERE id = " +
@@ -76,31 +114,56 @@ public class Sql {
             }
             else{
                 query = "SELECT * FROM Geral" +
-                           " WHERE id = " +
-                           " (SELECT MAX(id) FROM Geral);";
+                        " WHERE id = " +
+                        " (SELECT MAX(id) FROM Geral);";
             }            
             
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery(query);
             ResultSetMetaData rsmd = rs.getMetaData();
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
-                cliente1.add(rs.getString(i+1));                
+                cliente.add(rs.getString(i+1));                
             }            
             rs.close();
             stmt.close();
-            con.close();   
-            
-            
+            con.close();
             
         } catch (Exception e) {      
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
         }
-        return cliente1;
+        return cliente;
     }
     
-
+    public List SelectProxAnt(String botao, String id){
+        String descendo = "";
+        if (botao.equals("Anterior")){
+            botao = "<";
+            descendo = "DESC";
+        }else
+            botao = ">";
+        
+        try {            
+            query = "SELECT * FROM Geral" +
+                    " WHERE id " + botao + " " + id +
+                    " ORDER BY id " + descendo + " LIMIT 1;" ; 
+            
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            for (int i = 0; i < rsmd.getColumnCount(); i++) {
+                cliente.add(rs.getString(i+1));                
+            }            
+            rs.close();
+            stmt.close();
+            con.close();
+            
+        } catch (Exception e) {      
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
+        }
+        return cliente;
+    }    
 }
-
-
