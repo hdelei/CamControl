@@ -185,9 +185,8 @@ public class Sql {
         query += "'" + texto[6] + "', ";
         query += "'" + texto[7] + "', ";
         query += "'" + texto[8] + "', ";
-        query += "'" + texto[9] + "');";
+        query += "'" + texto[9] + "');";        
         
-        System.out.println(query);    
         try {
             Connect();
             con.setAutoCommit(false);
@@ -196,7 +195,7 @@ public class Sql {
             stmt.close();
             con.commit();
             con.close();
-            JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
+            JOptionPane.showMessageDialog(null, query);
             
         } catch (Exception e) {      
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
@@ -213,5 +212,25 @@ public class Sql {
             index++;
         }
         return texto;
+    }
+    
+    public void Deletar(String id){
+        query = "DELETE FROM Geral WHERE id = " + id + ";";
+        
+        try{
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            con.commit();
+            stmt.close();
+            con.close();
+            
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
+        }
+        catch(Exception e){
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+        }
     }
 }
