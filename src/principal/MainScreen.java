@@ -5,21 +5,18 @@
  */
 package principal;
 
-import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.TextField;
+import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+
 
 /**
  *
@@ -33,6 +30,7 @@ public class MainScreen extends javax.swing.JFrame {
     Botao botao = new Botao();
     String indiceAtual;
     List nomes, ids;
+    List campos = new ArrayList();
     
     public MainScreen() {
         initComponents();
@@ -133,6 +131,12 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setPreferredSize(new java.awt.Dimension(786, 510));
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyTyped(evt);
+            }
+        });
 
         cbTotal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "4", "8", "16", "32" }));
         cbTotal.setSelectedIndex(1);
@@ -484,6 +488,24 @@ public class MainScreen extends javax.swing.JFrame {
         cbAtivo.setMaximumRowCount(16);
         cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32" }));
 
+        txtTempo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTempoKeyTyped(evt);
+            }
+        });
+
+        txtValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtValorKeyTyped(evt);
+            }
+        });
+
+        txtData.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDataKeyTyped(evt);
+            }
+        });
+
         jLabel1.setText("Código");
 
         jLabel2.setText("Nome");
@@ -496,7 +518,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel6.setText("Canais ativos");
 
-        jLabel8.setText("Tempo de gravação");
+        jLabel8.setText("Dias gravação");
 
         jLabel9.setText("Valor");
 
@@ -591,6 +613,11 @@ public class MainScreen extends javax.swing.JFrame {
         );
 
         btSalvar.setText("Salvar alteração");
+        btSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSalvarActionPerformed(evt);
+            }
+        });
 
         btIncluir.setText("Incluir");
         btIncluir.setMaximumSize(new java.awt.Dimension(111, 23));
@@ -642,21 +669,22 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(cbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtTempo))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(46, 46, 46)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                                .addComponent(jLabel10)
-                                .addGap(56, 56, 56))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtData)
-                                .addContainerGap())))
+                                .addGap(68, 68, 68)
+                                .addComponent(txtData, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                .addContainerGap())
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10)
+                                .addGap(56, 56, 56))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -670,12 +698,12 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(10, 10, 10))
                                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(32, 260, Short.MAX_VALUE)
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblRegistro)
@@ -725,7 +753,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtArmazena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -741,7 +769,7 @@ public class MainScreen extends javax.swing.JFrame {
                         .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblRegistro)
                         .addComponent(jLabel12)))
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes com câmeras", jPanel1);
@@ -941,25 +969,20 @@ public class MainScreen extends javax.swing.JFrame {
     private void btIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIncluirActionPerformed
         // TODO add your handling code here:
         Sql sql = new Sql();
+        
+        List valores = ObtemCampos();        
+        sql.Incluir(valores);
+        
+        atualizaFormulario((String) valores.get(1));
         //sql.Connect();//
-        PopulaCampos(sql.AbreTabela());
+        //PopulaCampos(sql.AbreTabela());
         //sql.AbreTabela();
     }//GEN-LAST:event_btIncluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        Sql sql = new Sql();        
-        //popula campos inicial com o primeiro cliente
-        PopulaCampos(sql.AbreTabela());        
+        atualizaFormulario(null);
         
-        //Atualiza nomes e ids
-        nomes = sql.getNomes();
-        ids = sql.getIDs();
-        
-        //popula o combobox
-        nomes.stream().forEach((objeto) -> {
-            cbSelecionar.addItem((String)objeto);
-        });
     }//GEN-LAST:event_formWindowOpened
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
@@ -1024,6 +1047,48 @@ public class MainScreen extends javax.swing.JFrame {
         //List dados = sql.SelectPorIndice(indiceAtual);
         //PopulaCampos(dados);
     }//GEN-LAST:event_cbSelecionarItemStateChanged
+
+    private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btSalvarActionPerformed
+
+    private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
+        // TODO add your handling code here:
+        char vchar = evt.getKeyChar();
+        if (!(Character.isDigit(vchar)) 
+                || (vchar == KeyEvent.VK_BACK_SPACE) 
+                || (vchar == KeyEvent.VK_DELETE)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCodigoKeyTyped
+
+    private void txtTempoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTempoKeyTyped
+        // TODO add your handling code here:
+        
+        char vchar = evt.getKeyChar();
+        if (!(Character.isDigit(vchar)) 
+                || (vchar == KeyEvent.VK_BACK_SPACE) 
+                || (vchar == KeyEvent.VK_DELETE)){
+            evt.consume();
+        }        
+    }//GEN-LAST:event_txtTempoKeyTyped
+
+    private void txtValorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtValorKeyTyped
+        // TODO add your handling code here:
+        char vchar = evt.getKeyChar();
+        if (!(Character.isDigit(vchar)) && vchar != KeyEvent.VK_COMMA) {
+            evt.consume();
+        }
+        
+    }//GEN-LAST:event_txtValorKeyTyped
+
+    private void txtDataKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataKeyTyped
+        // TODO add your handling code here:
+        char vchar = evt.getKeyChar();
+        if (!(Character.isDigit(vchar)) && vchar != KeyEvent.VK_SLASH) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtDataKeyTyped
 
     /**
      * @param args the command line arguments
@@ -1166,13 +1231,61 @@ public class MainScreen extends javax.swing.JFrame {
         txtData.setText((String)dados.get(10));
         
         //Atualiza o cliente atual no combobox
-        cbSelecionar.setSelectedItem(dados.get(2));
+        
+        String item = (String)dados.get(2);
+        if (item != null) {
+            cbSelecionar.setSelectedItem(dados.get(2));
+        }
+        
+        
         
         //atualiza a PK para ser usada em outras chamadas
         indiceAtual = (String)dados.get(0);
         
         //Atualiza a label com o número real do registro
         lblRegistro.setText(indiceAtual);       
+        
+    }
+    private List ObtemCampos(){        
+        
+        
+        
+        //obtem todos os campos
+        campos.add(txtCodigo.getText());
+        campos.add(txtNome.getText());
+        campos.add(txtDdns.getText());
+        campos.add(txtModelo.getText());
+        campos.add(cbTotal.getSelectedItem());
+        campos.add(cbAtivo.getSelectedItem());
+        campos.add(txtArmazena.getText());
+        campos.add(txtTempo.getText());
+        
+        //faz o cast para evitar erros
+        String valorMoeda = txtValor.getText().replaceAll(",", ".");
+        campos.add(valorMoeda);
+        campos.add(txtData.getText());
+        
+        return campos;
+    }
+
+    private void atualizaFormulario(String novoItem) {
+        Sql sql = new Sql();        
+        //popula campos inicial com o primeiro cliente
+        PopulaCampos(sql.AbreTabela());        
+        
+        //Atualiza nomes e ids
+        nomes = sql.getNomes();
+        ids = sql.getIDs();
+        
+        //popula o combobox
+        if (novoItem == null) {
+            nomes.stream().forEach((objeto) -> {
+            cbSelecionar.addItem((String)objeto);
+        });
+        }
+        else{
+            cbSelecionar.addItem(novoItem);
+        }
         
     }
 }

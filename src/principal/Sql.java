@@ -7,9 +7,9 @@
 package principal;
 
 import java.sql.*;
-import java.time.temporal.IsoFields;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Vanderlei
@@ -144,11 +144,10 @@ public class Sql {
         }else
             botao = ">";
         
-        try {            
-            query = "SELECT * FROM Geral" +
+        query = "SELECT * FROM Geral" +
                     " WHERE id " + botao + " " + id +
-                    " ORDER BY id " + descendo + " LIMIT 1;" ; 
-            
+                    " ORDER BY id " + descendo + " LIMIT 1;" ;
+        try {
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
@@ -166,4 +165,53 @@ public class Sql {
         }
         return cliente;
     }    
+    
+    public List Incluir(List dados){
+        
+        String[] texto;// = new String[dados.size()];
+        texto = conversorStrings(dados);
+        
+        query = "INSERT INTO Geral(id,codigo,nome,ddns,modelo,cam_total,"
+                + "cam_ativ,cam_grava,periodo,valor,data)";
+                
+        query += " VALUES(";        
+        query += "null, ";
+        query += "'" + texto[0] + "', ";
+        query += "'" + texto[1] + "', ";
+        query += "'" + texto[2] + "', ";
+        query += "'" + texto[3] + "', ";
+        query += "'" + texto[4] + "', ";
+        query += "'" + texto[5] + "', ";
+        query += "'" + texto[6] + "', ";
+        query += "'" + texto[7] + "', ";
+        query += "'" + texto[8] + "', ";
+        query += "'" + texto[9] + "');";
+        
+        System.out.println(query);    
+        try {
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);            
+            stmt.close();
+            con.commit();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Dados inseridos com sucesso");
+            
+        } catch (Exception e) {      
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
+        }
+        
+        return cliente;
+    }
+    
+    private String[] conversorStrings(List dados){
+        String[] texto = new String[dados.size()];
+        int index = 0;
+        for (Object objetos : dados) {
+            texto[index] = objetos.toString();
+            index++;
+        }
+        return texto;
+    }
 }
