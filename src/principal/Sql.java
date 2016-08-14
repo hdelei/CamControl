@@ -41,9 +41,7 @@ public class Sql {
         catch(Exception e){
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
-        }
-     System.out.println("Opened database successfully");
-        
+        }        
         return true;
     }
     
@@ -229,8 +227,40 @@ public class Sql {
             JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
         }
         catch(Exception e){
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-      System.exit(0);
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );      
         }
+    }
+
+    void Atualiza(List campos, String id) {
+        String[] campoStrings;
+        campoStrings = conversorStrings(campos);
+        
+        query = "UPDATE Geral SET" + 
+                "   codigo ='" + campoStrings[0] +
+                "', nome ='" + campoStrings[1] +
+                "', ddns ='" + campoStrings[2] +
+                "', modelo ='" + campoStrings[3] +
+                "', cam_total ='" + campoStrings[4] +
+                "', cam_ativ ='" + campoStrings[5] +
+                "', cam_grava ='" + campoStrings[6] +
+                "', valor ='" + campoStrings[7] +
+                "', periodo ='" + campoStrings[8] +
+                "', data ='" + campoStrings[9] +
+                "' WHERE id = '" + id + "';";        
+        try {
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            con.commit();
+            stmt.close();
+            con.close();
+            JOptionPane.showMessageDialog(null, "Atualização feita com sucesso.");
+            
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro. Corrija o problema.");
+        }        
+        
     }
 }
