@@ -192,8 +192,7 @@ public class Sql {
             stmt.executeUpdate(query);            
             stmt.close();
             con.commit();
-            con.close();
-            JOptionPane.showMessageDialog(null, query);
+            con.close();            
             
         } catch (Exception e) {      
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      

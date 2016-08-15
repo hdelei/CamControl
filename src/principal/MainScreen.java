@@ -1113,17 +1113,25 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btIncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btIncluirActionPerformed
         // TODO add your handling code here:
+        String nome = txtNome.getText();
+        Boolean ehDuplicado = checaDuplicidade(nome);
+        
         if (txtNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo \"Nome\" é obrigatório");
             txtNome.requestFocus();
         }
+        else if(ehDuplicado){
+            JOptionPane.showMessageDialog(null, "Este nome já existe.\r\n" +
+                    "Escolha um nome diferente.");
+            txtNome.requestFocus();        
+        }
         else{
             Sql sql = new Sql();       
                
-        List valores = ObtemCampos();        
-        sql.Incluir(valores);
-        
-        atualizaFormulario((String) valores.get(1));
+            List valores = ObtemCampos();        
+            sql.Incluir(valores);        
+            atualizaFormulario((String)valores.get(1));
+            cbSelecionar.setSelectedItem(nome);
         }        
     }//GEN-LAST:event_btIncluirActionPerformed
 
@@ -1176,6 +1184,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
         Sql sql = new Sql();        
         int indice = cbSelecionar.getSelectedIndex();
+        System.out.println("O indice selecionado é: " + indice);
         //Obtém o registro através do indice do arrayList
         String registro = ids.get(indice).toString();
                 
@@ -1198,12 +1207,17 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
-        if (!txtNome.getText().equals("")) {
-            List campos = ObtemCampos();
+        String nome = txtNome.getText();
+        
+        
+        if (!nome.equals("")) {
+            campos = ObtemCampos();
             Sql sql = new Sql();
             sql.Atualiza(campos, indiceAtual);
             atualizaFormulario(null);
-        }else{
+            cbSelecionar.setSelectedItem(nome);
+        }        
+        else{
             JOptionPane.showMessageDialog(null, "O cliente precisa ter um nome.");
             txtNome.requestFocus();
         }
@@ -1389,9 +1403,9 @@ public class MainScreen extends javax.swing.JFrame {
         
     }
     private void PopulaCampos(List dados){
-        //Transforma o valor em decimal
-        DecimalFormat valor = new DecimalFormat("0.00");
-        Float numero = Float.parseFloat((String)dados.get(9));
+        //Transforma o valor em decimal 
+        Util util = new Util();
+        String valor = util.getDecimal((String)dados.get(9));
         
         //Popula todos os campos
         txtCodigo.setText((String)dados.get(1));
@@ -1402,11 +1416,10 @@ public class MainScreen extends javax.swing.JFrame {
         cbAtivo.setSelectedItem((String)dados.get(6));        
         txtArmazena.setText((String)dados.get(7));
         txtTempo.setText((String)dados.get(8));        
-        txtValor.setText(valor.format(numero));        
+        txtValor.setText(valor);        
         txtData.setText((String)dados.get(10));
         
-        //Atualiza o cliente atual no combobox
-        
+        //Atualiza o cliente atual no combobox        
         String item = (String)dados.get(2);
         if (item != null) {
             cbSelecionar.setSelectedItem(dados.get(2));
@@ -1420,6 +1433,9 @@ public class MainScreen extends javax.swing.JFrame {
         
     }
     private List ObtemCampos(){ 
+        //faz o cast para evitar erros
+        String valorMoeda = txtValor.getText().replaceAll(",", ".");
+        
         //obtem todos os campos
         campos.clear(); 
         campos.add(txtCodigo.getText());
@@ -1429,12 +1445,10 @@ public class MainScreen extends javax.swing.JFrame {
         campos.add(cbTotal.getSelectedItem());
         campos.add(cbAtivo.getSelectedItem());
         campos.add(txtArmazena.getText());
-        campos.add(txtTempo.getText());
-        
-        //faz o cast para evitar erros
-        String valorMoeda = txtValor.getText().replaceAll(",", ".");
         campos.add(valorMoeda);
+        campos.add(txtTempo.getText());
         campos.add(txtData.getText());
+        
         for (int i = 0; i < campos.size(); i++) {
             System.out.print(campos.get(i) + " - ");
         }
@@ -1447,9 +1461,12 @@ public class MainScreen extends javax.swing.JFrame {
         //popula campos inicial com o primeiro cliente
         PopulaCampos(sql.AbreTabela());        
         
-        //Atualiza nomes e ids
+        //Atualiza nomes e ids        
         nomes = sql.getNomes();
         ids = sql.getIDs();
+        for (int i = 0; i < ids.size(); i++) {
+            System.out.println(nomes.get(i) + " " + ids.get(i));
+        }
         
         //popula o combobox
         if (novoItem == null) {
@@ -1467,6 +1484,15 @@ public class MainScreen extends javax.swing.JFrame {
         else{
             cbSelecionar.addItem(novoItem);
         }        
+        
     }
-    
+
+    private Boolean checaDuplicidade(String nome) {
+        for (int i = 0; i < nomes.size(); i++) {
+            if (nome.equals(nomes.get(i))) {
+                return true;            
+            }
+        }        
+        return false;
+    }    
 }
