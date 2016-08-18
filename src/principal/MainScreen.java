@@ -1143,7 +1143,9 @@ public class MainScreen extends javax.swing.JFrame {
         //Teste de variavel de configuração
         try {
             config.load(new FileInputStream(arquivo));   
-            //config.setProperty("stringConexao", "Vanderlei");
+            config.setProperty("stringConexao", "Vanderlei");
+            
+            //config.store(out, "teste");
             System.out.println(config.getProperty("stringConexao"));
         } catch (IOException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
