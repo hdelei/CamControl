@@ -7,16 +7,22 @@ package principal;
 
 import java.awt.Component;
 import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.text.JTextComponent;
+import sun.applet.Main;
 
 
 /**
@@ -24,6 +30,9 @@ import javax.swing.text.JTextComponent;
  * @author Vanderlei
  */
 public class MainScreen extends javax.swing.JFrame {
+    
+    private static Properties config = new Properties();
+    private static String arquivo = "./properties/config.ini";
 
     /**
      * Creates new form MainScreen
@@ -1130,6 +1139,17 @@ public class MainScreen extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         atualizaFormulario(null);
+        
+        //Teste de variavel de configuração
+        try {
+            config.load(new FileInputStream(arquivo));   
+            //config.setProperty("stringConexao", "Vanderlei");
+            System.out.println(config.getProperty("stringConexao"));
+        } catch (IOException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+}
+        
+        
         
     }//GEN-LAST:event_formWindowOpened
 

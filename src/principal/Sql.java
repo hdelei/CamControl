@@ -19,7 +19,7 @@ public class Sql {
     private Connection con = null;
     private Statement stmt;
     private ResultSet rs;
-    private String connectionString = "jdbc:sqlite:\\\\BACKUP-SERVER\\security (D)\\BDCamControl\\CamBD.db";   
+    private String connectionString = "jdbc:sqlite:CamDB.db";   
     private String query;
     private List cliente = new ArrayList();
     private List nomes = new ArrayList();
