@@ -22,6 +22,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
+import jdk.nashorn.internal.ir.BreakNode;
 
 
 
@@ -60,6 +61,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtCaminhoBD = new javax.swing.JTextField();
         jButton33 = new javax.swing.JButton();
+        lblStatus = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtCodigo = new javax.swing.JTextField();
@@ -156,6 +158,12 @@ public class MainScreen extends javax.swing.JFrame {
         });
         configDialog.getContentPane().add(jButton33);
         jButton33.setBounds(480, 30, 79, 30);
+
+        lblStatus.setForeground(new java.awt.Color(0, 204, 102));
+        lblStatus.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblStatus.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        configDialog.getContentPane().add(lblStatus);
+        lblStatus.setBounds(10, 120, 540, 20);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Monitoramento de Imagens");
@@ -984,7 +992,11 @@ public class MainScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        if (!txtNome.getText().equals("")) {
+        if (cbSelecionar.getItemCount() == 1) {
+            JOptionPane.showMessageDialog(this, "Impossível excluir quando existe" +
+                    "apenas um cliente cadastrado.");            
+        }else{
+            if (!txtNome.getText().equals("")) {
             Sql sql = new Sql();
             sql.Deletar(indiceAtual);
             atualizaFormulario(null);
@@ -993,6 +1005,9 @@ public class MainScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione o cliente antes de excluir.");
             cbSelecionar.setSelectedIndex(0);
         }
+        }
+        
+        
                 
     }//GEN-LAST:event_btExcluirActionPerformed
 
@@ -1232,12 +1247,21 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
         Sql sql = new Sql();        
-        int indice = cbSelecionar.getSelectedIndex();
-        //System.out.println("O indice selecionado é: " + indice);
-        //Obtém o registro através do indice do arrayList
-        String registro = ids.get(indice).toString();
+        try {
+                int indice = cbSelecionar.getSelectedIndex();
+                //Obtém o registro através do indice do arrayList
+                String registro = ids.get(indice).toString();
+                PopulaCampos(sql.SelectPorIndice(registro));        
                 
-        PopulaCampos(sql.SelectPorIndice(registro));        
+        } catch (Exception e) {
+            System.out.println("Erro ao tentar selecionar o índice.");
+        }
+        
+        
+        
+        
+                
+        
     }//GEN-LAST:event_cbSelecionarActionPerformed
 
     private void cbSelecionarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSelecionarItemStateChanged
@@ -1340,7 +1364,8 @@ public class MainScreen extends javax.swing.JFrame {
     private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
         // TODO add your handling code here:
         JFileChooser chooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de bancos de dados", "db", "text");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter
+                        ("Arquivos de bancos de dados", "db", "text");
         chooser.setCurrentDirectory(new java.io.File("."));
         chooser.setDialogTitle("Escolher o caminho do Banco de dados");
         
@@ -1358,6 +1383,7 @@ public class MainScreen extends javax.swing.JFrame {
             try {
                 p.SaveProperties(varName, varValue);
                 txtCaminhoBD.setText(varValue);
+                lblStatus.setText("Caminho do Banco de dados atualizado");
             } catch (IOException ex) {
                 Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -1468,6 +1494,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRegistro;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JTextField txtArmazena;
     private javax.swing.JTextField txtCaminhoBD;
     private javax.swing.JTextField txtCodigo;
