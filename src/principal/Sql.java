@@ -269,6 +269,24 @@ public class Sql {
         } catch (Exception e) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             JOptionPane.showMessageDialog(null, "Ocorreu um erro. Corrija o problema.");
+        }         
+    }
+    void AtualizaSequencia() {//Atualiza sequencia de registros
+        query = "UPDATE sqlite_sequence SET seq = 0 " + 
+                " WHERE name = 'Geral';";
+                     
+        try {
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            stmt.executeUpdate(query);
+            con.commit();
+            stmt.close();
+            con.close();           
+            
+        } catch (Exception e) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            JOptionPane.showMessageDialog(null, "Ocorreu um erro. Corrija o problema.");
         }        
         
     }

@@ -1000,6 +1000,7 @@ public class MainScreen extends javax.swing.JFrame {
             Sql sql = new Sql();
             sql.Deletar(indiceAtual);
             atualizaFormulario(null);
+            sql.AtualizaSequencia();
         }
         else{
             JOptionPane.showMessageDialog(null, "Selecione o cliente antes de excluir.");
@@ -1201,6 +1202,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        
         atualizaFormulario(null);        
         
     }//GEN-LAST:event_formWindowOpened
@@ -1256,12 +1259,6 @@ public class MainScreen extends javax.swing.JFrame {
         } catch (Exception e) {
             System.out.println("Erro ao tentar selecionar o índice.");
         }
-        
-        
-        
-        
-                
-        
     }//GEN-LAST:event_cbSelecionarActionPerformed
 
     private void cbSelecionarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbSelecionarItemStateChanged
