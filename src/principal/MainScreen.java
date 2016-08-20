@@ -41,7 +41,10 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() {
         initComponents();
-        this.setLocationRelativeTo(null);        
+        GeraBD executa = new GeraBD();
+        executa.geraBD();
+        this.setLocationRelativeTo(null);  
+        configDialog.setLocationRelativeTo(this);
     }
 
     /**
@@ -128,6 +131,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
 
+        configDialog.setTitle("Configuração");
         configDialog.setPreferredSize(new java.awt.Dimension(596, 197));
         configDialog.setSize(new java.awt.Dimension(596, 197));
         configDialog.getContentPane().setLayout(null);
@@ -821,7 +825,12 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(153, 0, 51));
         jLabel12.setText("Registro nº ");
 
-        jLabel13.setText("Configurações");
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_cog.png"))); // NOI18N
+        jLabel13.setToolTipText("Configuração");
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.setMaximumSize(new java.awt.Dimension(25, 25));
+        jLabel13.setMinimumSize(new java.awt.Dimension(25, 25));
+        jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -898,7 +907,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13)
+                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -911,7 +920,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)))
-                    .addComponent(jLabel13))
+                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -949,7 +958,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes com câmeras", jPanel1);
@@ -1333,7 +1342,7 @@ public class MainScreen extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de bancos de dados", "db", "text");
         chooser.setCurrentDirectory(new java.io.File("."));
-        chooser.setDialogTitle("choosertitle");
+        chooser.setDialogTitle("Escolher o caminho do Banco de dados");
         
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         
