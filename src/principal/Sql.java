@@ -6,6 +6,7 @@
 
 package principal;
 
+import config.Propriedades;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,19 @@ public class Sql {
     private Connection con = null;
     private Statement stmt;
     private ResultSet rs;
-    private String connectionString = "jdbc:sqlite:CamDB.db";   
+    private final String sufix = "jdbc:sqlite:";
+    private String connectionString;
     private String query;
     private List cliente = new ArrayList();
     private List nomes = new ArrayList();
     private List ids = new ArrayList();
+    
+    Sql(){
+        
+        Propriedades p = new Propriedades();
+        connectionString = p.getStringConexao();        
+    }
+    
     
     public List getNomes(){
         return nomes;
@@ -36,7 +45,7 @@ public class Sql {
     public boolean Connect(){
         try{
             Class.forName("org.sqlite.JDBC");
-            con = DriverManager.getConnection(connectionString);
+            con = DriverManager.getConnection(sufix + connectionString);
         }
         catch(Exception e){
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

@@ -5,35 +5,32 @@
  */
 package principal;
 
+import config.Propriedades;
 import java.awt.Component;
 import java.awt.event.KeyEvent;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
-import sun.applet.Main;
+
 
 
 /**
  *
  * @author Vanderlei
  */
-public class MainScreen extends javax.swing.JFrame {
+public class MainScreen extends javax.swing.JFrame {    
     
-    private static Properties config = new Properties();
-    private static String arquivo = "./properties/config.ini";
-
     /**
      * Creates new form MainScreen
      */
@@ -56,6 +53,10 @@ public class MainScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        configDialog = new javax.swing.JDialog();
+        jLabel11 = new javax.swing.JLabel();
+        txtCaminhoBD = new javax.swing.JTextField();
+        jButton33 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtCodigo = new javax.swing.JTextField();
@@ -125,6 +126,32 @@ public class MainScreen extends javax.swing.JFrame {
         btExcluir = new javax.swing.JButton();
         lblRegistro = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+
+        configDialog.setPreferredSize(new java.awt.Dimension(596, 197));
+        configDialog.setSize(new java.awt.Dimension(596, 197));
+        configDialog.getContentPane().setLayout(null);
+
+        jLabel11.setText("Caminho do banco de dados:");
+        configDialog.getContentPane().add(jLabel11);
+        jLabel11.setBounds(10, 10, 490, 14);
+
+        txtCaminhoBD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCaminhoBDActionPerformed(evt);
+            }
+        });
+        configDialog.getContentPane().add(txtCaminhoBD);
+        txtCaminhoBD.setBounds(10, 30, 460, 30);
+
+        jButton33.setText("Modificar");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
+        configDialog.getContentPane().add(jButton33);
+        jButton33.setBounds(480, 30, 79, 30);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Monitoramento de Imagens");
@@ -157,7 +184,7 @@ public class MainScreen extends javax.swing.JFrame {
         cbTotal.setSelectedIndex(1);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(151, 39, 42));
@@ -654,7 +681,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setText("Câmeras sendo armazenadas");
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecionar cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
         cbSelecionar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -794,6 +821,13 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(153, 0, 51));
         jLabel12.setText("Registro nº ");
 
+        jLabel13.setText("Configurações");
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -863,16 +897,21 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(txtDdns)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel13)
+                                .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)))
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -910,7 +949,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(btIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes com câmeras", jPanel1);
@@ -1138,20 +1177,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        atualizaFormulario(null);
-        
-        //Teste de variavel de configuração
-        try {
-            config.load(new FileInputStream(arquivo));   
-            config.setProperty("stringConexao", "Vanderlei");
-            
-            //config.store(out, "teste");
-            System.out.println(config.getProperty("stringConexao"));
-        } catch (IOException ex) {
-                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-}
-        
-        
+        atualizaFormulario(null);        
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -1198,7 +1224,7 @@ public class MainScreen extends javax.swing.JFrame {
     private void cbSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSelecionarActionPerformed
         Sql sql = new Sql();        
         int indice = cbSelecionar.getSelectedIndex();
-        System.out.println("O indice selecionado é: " + indice);
+        //System.out.println("O indice selecionado é: " + indice);
         //Obtém o registro através do indice do arrayList
         String registro = ids.get(indice).toString();
                 
@@ -1291,6 +1317,47 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btBackspaceActionPerformed
 
+    private void txtCaminhoBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCaminhoBDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCaminhoBDActionPerformed
+
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        // TODO add your handling code here:
+        configDialog.setVisible(true);
+        Propriedades p = new Propriedades();
+        txtCaminhoBD.setText(p.getStringConexao());
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Arquivos de bancos de dados", "db", "text");
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("choosertitle");
+        
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
+        chooser.setAcceptAllFileFilterUsed(false);
+        chooser.setFileFilter(filter);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            
+            Propriedades p = new Propriedades();
+            String varName = "stringConexao";
+            String varValue = chooser.getSelectedFile().toString();            
+            
+            try {
+                p.SaveProperties(varName, varValue);
+                txtCaminhoBD.setText(varValue);
+            } catch (IOException ex) {
+                Logger.getLogger(MainScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        } else {
+        System.out.println("No Selection ");
+        }
+    }//GEN-LAST:event_jButton33ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1340,6 +1407,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbAtivo;
     private javax.swing.JComboBox<String> cbSelecionar;
     private javax.swing.JComboBox<String> cbTotal;
+    private javax.swing.JDialog configDialog;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -1366,6 +1434,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1374,7 +1443,9 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1389,6 +1460,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JTextField txtArmazena;
+    private javax.swing.JTextField txtCaminhoBD;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtDdns;
@@ -1463,9 +1535,9 @@ public class MainScreen extends javax.swing.JFrame {
         campos.add(txtTempo.getText());
         campos.add(txtData.getText());
         
-        for (int i = 0; i < campos.size(); i++) {
-            System.out.print(campos.get(i) + " - ");
-        }
+//        for (int i = 0; i < campos.size(); i++) {
+//            System.out.print(campos.get(i) + " - ");
+//        }
         
         return campos;
     }
@@ -1478,9 +1550,9 @@ public class MainScreen extends javax.swing.JFrame {
         //Atualiza nomes e ids        
         nomes = sql.getNomes();
         ids = sql.getIDs();
-        for (int i = 0; i < ids.size(); i++) {
-            System.out.println(nomes.get(i) + " " + ids.get(i));
-        }
+//        for (int i = 0; i < ids.size(); i++) {
+//            System.out.println(nomes.get(i) + " " + ids.get(i));
+//        }
         
         //popula o combobox
         if (novoItem == null) {
