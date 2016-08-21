@@ -134,7 +134,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
 
         configDialog.setTitle("Configuração");
-        configDialog.setPreferredSize(new java.awt.Dimension(596, 197));
         configDialog.setSize(new java.awt.Dimension(596, 197));
         configDialog.getContentPane().setLayout(null);
 
@@ -836,9 +835,6 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icon_cog.png"))); // NOI18N
         jLabel13.setToolTipText("Configuração");
         jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel13.setMaximumSize(new java.awt.Dimension(25, 25));
-        jLabel13.setMinimumSize(new java.awt.Dimension(25, 25));
-        jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
@@ -915,7 +911,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel13)
                                 .addContainerGap())))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -928,7 +924,7 @@ public class MainScreen extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)))
-                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1000,7 +996,7 @@ public class MainScreen extends javax.swing.JFrame {
             Sql sql = new Sql();
             sql.Deletar(indiceAtual);
             atualizaFormulario(null);
-            sql.AtualizaSequencia();
+            
         }
         else{
             JOptionPane.showMessageDialog(null, "Selecione o cliente antes de excluir.");
