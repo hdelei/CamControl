@@ -140,7 +140,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel11.setText("Caminho do banco de dados:");
         configDialog.getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 10, 490, 14);
+        jLabel11.setBounds(10, 10, 490, 16);
 
         txtCaminhoBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,7 +197,7 @@ public class MainScreen extends javax.swing.JFrame {
         cbTotal.setSelectedIndex(1);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(151, 39, 42));
@@ -694,7 +694,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setText("Câmeras sendo armazenadas");
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
         cbSelecionar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -967,8 +967,6 @@ public class MainScreen extends javax.swing.JFrame {
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
-        jPanel3.getAccessibleContext().setAccessibleName("Selecione o cliente");
-
         jTabbedPane1.addTab("Clientes com câmeras", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -984,7 +982,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1566,8 +1564,8 @@ public class MainScreen extends javax.swing.JFrame {
         campos.add(cbTotal.getSelectedItem());
         campos.add(cbAtivo.getSelectedItem());
         campos.add(txtArmazena.getText());
-        campos.add(valorMoeda);
         campos.add(txtTempo.getText());
+        campos.add(valorMoeda);
         campos.add(txtData.getText());
         
 //        for (int i = 0; i < campos.size(); i++) {

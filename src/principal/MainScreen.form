@@ -1170,9 +1170,6 @@
                   </Border>
                 </Property>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Selecione o cliente"/>
-              </AccessibilityProperties>
 
               <Layout>
                 <DimensionLayout dim="0">
