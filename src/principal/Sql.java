@@ -6,11 +6,15 @@
 
 package principal;
 
+
 import config.Propriedades;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+
 import javax.swing.JOptionPane;
+import relatorios.Cliente;
 /**
  *
  * @author Vanderlei
@@ -27,7 +31,7 @@ public class Sql {
     private List nomes = new ArrayList();
     private List ids = new ArrayList();
     
-    Sql(){
+    public Sql(){
         
         Propriedades p = new Propriedades();
         connectionString = p.getStringConexao();        
@@ -52,6 +56,41 @@ public class Sql {
             System.exit(0);
         }        
         return true;
+    }
+    
+    
+    /**
+     * 
+     * @return List from clientes da classe Cliente
+     * Obtém todos os clientes e dados do BD e gera uma lista
+     */    
+    public List<Cliente> Select(){
+        List<Cliente> clientesLista = new ArrayList<>();
+        try {
+            query = "SELECT * FROM Geral;";
+            Connect();
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);            
+            //ResultSetMetaData rsmd = rs.getMetaData();
+            while(rs.next()){
+                List clienteUnico = new LinkedList();
+                for (int i = 1; i < 12; i++) {
+                    clienteUnico.add(rs.getObject(i));
+                }                
+                
+                Cliente cli = new Cliente(clienteUnico);
+                clientesLista.add(cli);                
+            } 
+            rs.close();
+            stmt.close();
+            con.close();   
+            
+        } catch (Exception e) {      
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
+        }
+        
+        return clientesLista;
     }
     
     public List SelectPorIndice(String id){

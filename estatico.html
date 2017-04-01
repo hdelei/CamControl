@@ -1,0 +1,71 @@
+<! DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Relatório CAM CONTROL</title>
+<style>  
+.pbreak {
+	page-break-before:always;
+	padding-top:45px;
+}
+@media screen {
+  div.header {
+    position:absolute;
+	top:0;	
+  }
+}
+@media print {
+  div.header {
+    position: fixed;
+    top: 0;	
+	}
+  }
+  body{
+    background: #f9f9f9;
+    padding-left: 15px;
+    padding-right:15px;
+    padding-bottom:10px;
+    padding-top:10px;
+    font-family: Tahoma;  		
+  }
+  #top, #bottom, #left, #right {
+    background: white;
+	  position: fixed;
+	}
+	#left, #right {
+		top: 0; bottom: 0;
+		width: 15px;
+	}
+	#left { left: 0; }
+	#right { right: 0; }		
+	#top, #bottom {
+		left: 0; right: 0;
+		height: 15px;
+	}
+	#top { top: 0; }
+	#bottom { bottom: 0; }
+  .t { color:#999b9b; }
+  .back {
+    background: white;    
+    color:#363d68;    
+    padding: 3px;    
+  }
+  hr{
+    border-style:dashed;    
+    color:#efefef;
+  }
+</style>
+</head>
+<body>
+
+  <div class="header"><h3 style="color:#007396" text-align="center">RELAÇÃO DE CLIENTES COM CÂMERAS</h3></div>  
+  $dinamic <!--Conteudo dinâmico do html-->
+	<hr>
+	</p>
+	<div id="left"></div>
+	<div id="right"></div>
+	<div id="top"></div>
+	<div id="bottom"></div>
+  
+</body>
+</html>
