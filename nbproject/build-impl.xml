@@ -37,6 +37,8 @@ is divided into following sections:
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
+    
+    
     <target depends="-pre-init" name="-init-private">
         <property file="nbproject/private/config.properties"/>
         <property file="nbproject/private/configs/${config}.properties"/>
@@ -939,6 +941,8 @@ is divided into following sections:
         </copy>
     </target>
     <target name="-post-compile">
+        <copy file="dinamico.html" todir="${dist.dir}"/>
+        <copy file="estatico.html" todir="${dist.dir}"/>
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
