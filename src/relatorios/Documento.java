@@ -8,6 +8,8 @@ package relatorios;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -92,12 +94,21 @@ public class Documento {
     private String getHtmlEstatico(){
         StringBuilder _htmlEstatico = new StringBuilder();
         try {
-            BufferedReader doc = new BufferedReader(new FileReader("estatico.html"));
+            //este trecho obtém o html como um recurso da aplicação
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream htmlStream = classLoader.getResourceAsStream("resources/estatico.html");            
+            //============          
+            
+            //código antigo
+            //BufferedReader doc = new BufferedReader(new FileReader("estatico.html"));
+            BufferedReader doc = new BufferedReader(new InputStreamReader(htmlStream));
             String str;
             while ((str = doc.readLine()) != null) {
-                _htmlEstatico.append(str);
+                _htmlEstatico.append(str);                
             }
+            htmlStream.close();
             doc.close();
+            
         } catch (IOException e) {
         }
         return _htmlEstatico.toString();
@@ -110,11 +121,15 @@ public class Documento {
     private String getHtmlDinamico(){
         StringBuilder _htmlDinamico = new StringBuilder();
         try {
-            BufferedReader doc = new BufferedReader(new FileReader("dinamico.html"));
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            InputStream htmlStream = classLoader.getResourceAsStream("resources/dinamico.html");  
+            
+            BufferedReader doc = new BufferedReader(new InputStreamReader(htmlStream));
             String str;
             while ((str = doc.readLine()) != null) {
                 _htmlDinamico.append(str);
             }
+            htmlStream.close();
             doc.close();
         } catch (IOException e) {
         }

@@ -941,8 +941,8 @@ is divided into following sections:
         </copy>
     </target>
     <target name="-post-compile">
-        <copy file="dinamico.html" todir="${dist.dir}"/>
-        <copy file="estatico.html" todir="${dist.dir}"/>
+        <!--<copy file="dinamico.html" todir="${dist.dir}"/>
+        <copy file="estatico.html" todir="${dist.dir}"/>-->
         <!-- Empty placeholder for easier customization. -->
         <!-- You can override this target in the ../build.xml file. -->
     </target>
