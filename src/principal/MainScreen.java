@@ -23,9 +23,6 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
 import java.awt.Toolkit;
-import jdk.nashorn.internal.ir.BreakNode;
-import relatorios.Cliente;
-import relatorios.Documento;
 import relatorios.Relatorio;
 
 
@@ -144,7 +141,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel11.setText("Caminho do banco de dados:");
         configDialog.getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 10, 490, 14);
+        jLabel11.setBounds(10, 10, 490, 16);
 
         txtCaminhoBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +198,7 @@ public class MainScreen extends javax.swing.JFrame {
         cbTotal.setSelectedIndex(1);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(151, 39, 42));
@@ -698,7 +695,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setText("Câmeras sendo armazenadas");
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
         cbSelecionar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -998,7 +995,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1215,10 +1212,7 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
-        
-        atualizaFormulario(null);        
-        
+        atualizaFormulario(null);     
     }//GEN-LAST:event_formWindowOpened
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
@@ -1235,6 +1229,13 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btUltimoActionPerformed
 
     private void btAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAnteriorActionPerformed
+        int posicaoAtual, posicaoAnterior;
+        posicaoAtual = cbSelecionar.getItemCount();
+        posicaoAnterior = cbSelecionar.getSelectedIndex() - 1; 
+        if (posicaoAnterior < 0) {            
+            return;
+        }
+        
         
         String botao = evt.getActionCommand(); 
         Sql sql = new Sql();
@@ -1248,6 +1249,12 @@ public class MainScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_btAnteriorActionPerformed
 
     private void btProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProximoActionPerformed
+        int quantidade, posicaoPosterior;
+        quantidade = cbSelecionar.getItemCount() - 1;
+        posicaoPosterior = cbSelecionar.getSelectedIndex() + 1;
+        if (posicaoPosterior > quantidade) {            
+            return;
+        }
         
         String botao = evt.getActionCommand(); 
         
@@ -1286,6 +1293,7 @@ public class MainScreen extends javax.swing.JFrame {
         
         //List dados = sql.SelectPorIndice(indiceAtual);
         //PopulaCampos(dados);
+        System.out.println("Quantidade de itens: " + cbSelecionar.getItemCount());
     }//GEN-LAST:event_cbSelecionarItemStateChanged
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
@@ -1618,6 +1626,7 @@ public class MainScreen extends javax.swing.JFrame {
             cbSelecionar.addItem((String)objeto);
             cbSelecionar.setSelectedIndex(0);
         });
+            //System.out.println("Quantidade de itens: " + cbSelecionar.getItemCount());
         }
         else{
             cbSelecionar.addItem(novoItem);

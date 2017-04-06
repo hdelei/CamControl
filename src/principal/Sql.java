@@ -208,6 +208,7 @@ public class Sql {
             con.close();
             
         } catch (Exception e) {      
+            
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );                      
         }
         return cliente;
