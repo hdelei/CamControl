@@ -134,6 +134,7 @@ public class MainScreen extends javax.swing.JFrame {
         lblRegistro = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        lblTotal = new javax.swing.JLabel();
 
         configDialog.setTitle("Configuração");
         configDialog.setSize(new java.awt.Dimension(596, 197));
@@ -141,7 +142,7 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel11.setText("Caminho do banco de dados:");
         configDialog.getContentPane().add(jLabel11);
-        jLabel11.setBounds(10, 10, 490, 16);
+        jLabel11.setBounds(10, 10, 490, 14);
 
         txtCaminhoBD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -198,7 +199,7 @@ public class MainScreen extends javax.swing.JFrame {
         cbTotal.setSelectedIndex(1);
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione os canais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel2.setToolTipText("");
 
         jButton1.setBackground(new java.awt.Color(151, 39, 42));
@@ -695,7 +696,7 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel7.setText("Câmeras sendo armazenadas");
 
         jPanel3.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Selecione o cliente", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
         cbSelecionar.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -857,6 +858,10 @@ public class MainScreen extends javax.swing.JFrame {
             }
         });
 
+        lblTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        lblTotal.setForeground(new java.awt.Color(153, 0, 51));
+        lblTotal.setText("Total de clientes:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -921,12 +926,14 @@ public class MainScreen extends javax.swing.JFrame {
                                         .addComponent(btExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(252, 252, 252)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(lblTotal)
+                                        .addGap(151, 151, 151)
                                         .addComponent(jLabel12)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblRegistro))
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(lblRegistro)))))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -961,7 +968,7 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(txtTempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 44, Short.MAX_VALUE)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtArmazena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -973,8 +980,9 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblRegistro)
-                        .addComponent(jLabel12))
-                    .addComponent(btIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addComponent(lblTotal))
+                    .addComponent(btIncluir, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                     .addComponent(btSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
@@ -995,7 +1003,7 @@ public class MainScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1212,7 +1220,8 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        atualizaFormulario(null);     
+        atualizaFormulario(null);
+        lblTotal.setText("Total de clientes: " + cbSelecionar.getItemCount());
     }//GEN-LAST:event_formWindowOpened
 
     private void btPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPrimeiroActionPerformed
@@ -1293,7 +1302,8 @@ public class MainScreen extends javax.swing.JFrame {
         
         //List dados = sql.SelectPorIndice(indiceAtual);
         //PopulaCampos(dados);
-        System.out.println("Quantidade de itens: " + cbSelecionar.getItemCount());
+        lblTotal.setText("Total de clientes: " + cbSelecionar.getItemCount());
+        //System.out.println("Quantidade de itens: " + cbSelecionar.getItemCount());
     }//GEN-LAST:event_cbSelecionarItemStateChanged
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
@@ -1519,6 +1529,7 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRegistro;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblTotal;
     private javax.swing.JTextField txtArmazena;
     private javax.swing.JTextField txtCaminhoBD;
     private javax.swing.JTextField txtCodigo;
