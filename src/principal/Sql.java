@@ -292,8 +292,8 @@ public class Sql {
                 "', cam_total ='" + campoStrings[4] +
                 "', cam_ativ ='" + campoStrings[5] +
                 "', cam_grava ='" + campoStrings[6] +
-                "', valor ='" + campoStrings[7] +
-                "', periodo ='" + campoStrings[8] +
+                "', periodo ='" + campoStrings[7] +
+                "', valor ='" + campoStrings[8] +
                 "', data ='" + campoStrings[9] +
                 "' WHERE id = '" + id + "';";        
         try {
