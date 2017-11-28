@@ -67,7 +67,7 @@ public class Sql {
     public List<Cliente> Select(){
         List<Cliente> clientesLista = new ArrayList<>();
         try {
-            query = "SELECT * FROM Geral;";
+            query = "SELECT * FROM Geral ORDER nome BY ASC;";
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
@@ -129,7 +129,7 @@ public class Sql {
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
-            rs = stmt.executeQuery("SELECT * FROM Geral;");
+            rs = stmt.executeQuery("SELECT * FROM Geral ORDER BY nome ASC;");
             ResultSetMetaData rsmd = rs.getMetaData();
             
             for (int i = 0; i < rsmd.getColumnCount(); i++) {
