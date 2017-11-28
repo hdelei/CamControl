@@ -32,8 +32,8 @@ public class Propriedades {
         try {
             loadProperties();
         } catch (IOException ex) {
-            System.out.println("Não existe arquivo de configuração."+
-                    "\r\nCarregadas as configurações padrão.");
+            //System.out.println("Não existe arquivo de configuração."+
+            //        "\r\nCarregadas as configurações padrão.");
             }
         stringConexao = configProps.getProperty("stringConexao");
     }
