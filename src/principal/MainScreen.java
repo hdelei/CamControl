@@ -23,6 +23,11 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.text.JTextComponent;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.text.DefaultEditorKit;
 import jdk.nashorn.internal.objects.NativeArray;
 import relatorios.Relatorio;
 
@@ -44,6 +49,21 @@ public class MainScreen extends javax.swing.JFrame {
     
     public MainScreen() {
         initComponents();
+        
+        txtDdns.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(final MouseEvent e) {
+                if (e.isPopupTrigger()) {
+                    final JPopupMenu menu = new JPopupMenu();
+                    JMenuItem item;
+                    item = new JMenuItem(new DefaultEditorKit.CopyAction());
+                    item.setText("Copiar");
+                    item.setEnabled(txtDdns.getSelectionStart() != txtDdns.getSelectionEnd());
+                    menu.add(item);
+                    menu.show(e.getComponent(), e.getX(), e.getY());
+                }
+            }
+        });
+        
         GeraBD executa = new GeraBD();
         executa.geraBD();
         this.setLocationRelativeTo(null);  
@@ -1704,5 +1724,5 @@ public class MainScreen extends javax.swing.JFrame {
             }
             count++;
         }
-    }
+    }        
 }
