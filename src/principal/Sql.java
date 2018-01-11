@@ -67,7 +67,7 @@ public class Sql {
     public List<Cliente> Select(){
         List<Cliente> clientesLista = new ArrayList<>();
         try {
-            query = "SELECT * FROM Geral ORDER nome BY ASC;";
+            query = "SELECT * FROM Geral ORDER BY nome ASC;";
             Connect();
             con.setAutoCommit(false);
             stmt = con.createStatement();
